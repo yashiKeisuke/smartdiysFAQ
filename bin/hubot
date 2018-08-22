@@ -3,7 +3,6 @@
 set -e
 
 npm install
-export HUBOT_CHATWORK_TOKEN="17403afa08cd095b3a590319717fca77"
 export HUBOT_CHATWORK_ROOMS="120259405"
 export HUBOT_CHATWORK_API_RATE="500"
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
