@@ -1,1 +1,1 @@
-web: bin/hubot -a chatwork -n FAQ_Bot
+web: bin/hubot -a chatwork -n FAQ
