@@ -5,6 +5,12 @@ set -e
 npm install
 export HUBOT_CHATWORK_ROOMS="120259405"
 export HUBOT_CHATWORK_API_RATE="500"
+export HUBOT_CHATWORK_EXCLUDE_ACCOUNTS="FAQ_bot"
 export PATH="node_modules/.bin:node_modules/hubot/node_modules/.bin:$PATH"
+
+export HUBOT_HEROKU_KEEPALIVE_URL="https://smartdiysfaq.herokuapp.com/"
+export HUBOT_HEROKU_WAKEUP_TIME=8:00
+export HUBOT_HEROKU_SLEEP_TIME=19:00
+export HUBOT_HEROKU_KEEPALIVE_INTERVAL=25
 
 exec node_modules/.bin/hubot --name "smartdiysFAQ" "$@"
