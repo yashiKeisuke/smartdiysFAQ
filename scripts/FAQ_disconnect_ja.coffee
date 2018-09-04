@@ -81,6 +81,10 @@ https://support.smartdiys.com/hc/ja/requests/new
 			 	　'''選択肢がありません''' 
 		else 
 		 	　'''選択肢がありません''' 
+
+		delete robot.FAQ_disconnect_ja
+		return
+
 	next_value = (input) -> 
 		robot.FAQ_disconnect_ja.next(input).value 
 	robot.respond /非接続|(?=.*接続)(?=.*しな)|(?=.*接続)(?=.*ならな)/i, (msg) -> 
@@ -93,4 +97,6 @@ https://support.smartdiys.com/hc/ja/requests/new
 		if 'ignore_input' of robot and robot.ignore_input 
 			delete robot.ignore_input 
 			return 
+		if /bot/.test msg.message.user.name
+			return
 		msg.send(next_value msg.match[1]) 

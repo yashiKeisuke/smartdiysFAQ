@@ -81,4 +81,6 @@ FABOOLDesktopは表示結果がそのまま加工結果になるので、FABOOLD
 		if 'ignore_input' of robot and robot.ignore_input 
 			delete robot.ignore_input 
 			return 
+		if /bot/.test msg.message.user.name
+			return	
 		msg.send(next_value msg.match[1]) 
