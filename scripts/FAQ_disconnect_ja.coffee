@@ -85,11 +85,13 @@ https://support.smartdiys.com/hc/ja/requests/new
 		delete robot.FAQ_disconnect_ja
 		return
 
+	reactedUserName = ""
 	next_value = (input) -> 
 		robot.FAQ_disconnect_ja.next(input).value 
 	robot.respond /非接続|(?=.*接続)(?=.*しな)|(?=.*接続)(?=.*ならな)/i, (msg) -> 
 		robot.ignore_input = true 
 		robot.FAQ_disconnect_ja = FAQ_disconnect_ja() 
+		reactedUserName = msg.message.user.name
 		msg.send(next_value()) 
 	robot.hear /(.*)s*$/i, (msg) -> 
 		if !('FAQ_disconnect_ja' of robot and robot.FAQ_disconnect_ja) 
@@ -97,6 +99,6 @@ https://support.smartdiys.com/hc/ja/requests/new
 		if 'ignore_input' of robot and robot.ignore_input 
 			delete robot.ignore_input 
 			return 
-		if /bot/.test msg.message.user.name
+		if reactedUserName != msg.message.user.name
 			return
 		msg.send(next_value msg.match[1]) 

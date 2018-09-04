@@ -69,11 +69,14 @@ FABOOLDesktopは表示結果がそのまま加工結果になるので、FABOOLD
 			 	　'''選択肢がありません''' 
 		else 
 		 	　'''選択肢がありません''' 
+			 
+	reactedUserName = ""		 
 	next_value = (input) -> 
 		robot.FAQ_oddgraphics_ja.next(input).value 
 	robot.respond /(?=.*VG)(?=.*おかし)|(?=.*グラフィック)(?=.*おかし)/i, (msg) -> 
 		robot.ignore_input = true 
 		robot.FAQ_oddgraphics_ja = FAQ_oddgraphics_ja() 
+		reactedUserName = msg.message.user.name
 		msg.send(next_value()) 
 	robot.hear /(.*)s*$/i, (msg) -> 
 		if !('FAQ_oddgraphics_ja' of robot and robot.FAQ_oddgraphics_ja) 
@@ -81,6 +84,6 @@ FABOOLDesktopは表示結果がそのまま加工結果になるので、FABOOLD
 		if 'ignore_input' of robot and robot.ignore_input 
 			delete robot.ignore_input 
 			return 
-		if /bot/.test msg.message.user.name
+		if reactedUserName != msg.message.user.name
 			return	
 		msg.send(next_value msg.match[1]) 

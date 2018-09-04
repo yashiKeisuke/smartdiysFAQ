@@ -216,11 +216,14 @@ Mac：https://www.smartdiys.com/data/v280/FaboolInstallerMac_v280.pkg
 			 	　'''選択肢がありません''' 
 		else 
 		 	　'''選択肢がありません''' 
+			 
+	reactedUserName = ""
 	next_value = (input) -> 
 		robot.FAQ_softwareMigration_ja.next(input).value 
 	robot.respond /(?=.*ソフト)(?=.*移行)/i, (msg) -> 
 		robot.ignore_input = true 
 		robot.FAQ_softwareMigration_ja = FAQ_softwareMigration_ja() 
+		reactedUserName = msg.message.user.name
 		msg.send(next_value()) 
 	robot.hear /(.*)s*$/i, (msg) -> 
 		if !('FAQ_softwareMigration_ja' of robot and robot.FAQ_softwareMigration_ja) 
@@ -228,6 +231,6 @@ Mac：https://www.smartdiys.com/data/v280/FaboolInstallerMac_v280.pkg
 		if 'ignore_input' of robot and robot.ignore_input 
 			delete robot.ignore_input 
 			return 
-		if /bot/.test msg.message.user.name
+		if reactedUserName != msg.message.user.name
 			return			
 		msg.send(next_value msg.match[1]) 
